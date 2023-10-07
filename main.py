@@ -4,6 +4,7 @@ from handlers.start import start_router
 from handlers.info import info_router
 from handlers.pictures import picture_router
 from handlers.shop import shop_router
+from handlers.adminchat import admin_router
 from bot import bot, dp, scheduler
 from handlers.question import questions_router
 from db.shopdb import init_db, create_tables, populate_tables
@@ -16,7 +17,7 @@ async def on_startup(dispatcher):
     init_db()
     create_tables()
     populate_tables()
-    await remind_me()
+    # await remind_me()
     dbcars()
 
 
@@ -39,7 +40,8 @@ async def main():
     dp.include_router(picture_router)
     dp.include_router(shop_router)
     dp.include_router(questions_router)
-    dp.include_router(scheduler_router)
+    # dp.include_router(scheduler_router)
+    dp.include_router(admin_router)
 
     scheduler.start()
     await dp.start_polling(bot)
