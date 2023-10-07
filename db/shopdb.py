@@ -9,16 +9,21 @@ def init_db():
 
 
 def create_tables():
-    cursor.execute(
-        """
-        DROP TABLE IF EXISTS product
-        """
-    )
-    cursor.execute(
-        """
-       DROP TABLE IF EXISTS category
-        """
-    )
+    # cursor.execute(
+    #     """
+    #     DROP TABLE IF EXISTS product
+    #     """
+    # )
+    # cursor.execute(
+    #     """
+    #    DROP TABLE IF EXISTS category
+    #     """
+    # )
+    # cursor.execute(
+    #     """
+    #     DROP TABLE IF EXISTS mashina
+    #     """
+    #
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS questions (
@@ -47,6 +52,17 @@ def create_tables():
         )
         """
     )
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS mashina (
+            carId INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT,
+            price FLOAT,
+            desc TEXT,
+            link TEXT
+        )
+        """
+    )
     db.commit()
 
 
@@ -70,6 +86,27 @@ def populate_tables():
                 ('Овощи2', 26.0, 3)
         """
     )
+
+def save_cars(title, desc, link, price):
+
+    cursor.execute(
+        """
+        INSERT INTO mashina (title, desc, link, price)
+        VALUES (:t, :d, :l, :p)
+        """,
+        {
+            "t": title,
+            "d": desc,
+            "l": link,
+            "p": price,
+        },
+    )
+def fcars():
+    cursor.execute(
+    """
+    SELECT * FROM  mashina WHERE carId < 10
+    """)
+    return cursor.fetchall()
 
 def save_question(user_id):
     cursor.execute(

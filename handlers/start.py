@@ -4,7 +4,8 @@ from aiogram.types.inline_keyboard_button import InlineKeyboardButton as IButton
 from aiogram.types.inline_keyboard_markup import InlineKeyboardMarkup
 from text1 import START_TEXT
 from text2 import BUTTON_TEXT
-from db.shopdb import save_question
+from db.shopdb import save_question, fcars
+
 
 start_router = Router()
 
@@ -21,6 +22,11 @@ async def hello(message: types.Message):
        ]
     )
     await message.answer(START_TEXT, reply_markup=kb)
+
+@start_router.message(Command("cars"))
+async def cars(message: types.Message):
+    for car in fcars():
+        await message.answer(f"Название:{car[1]}\nЦена:{car[2]}\nОписание:{car[3]}\nСсылка:{car[4]}")
 
 
 @start_router.callback_query(F.data == "podpis")

@@ -6,15 +6,19 @@ from handlers.pictures import picture_router
 from handlers.shop import shop_router
 from bot import bot, dp, scheduler
 from handlers.question import questions_router
-from db.shopdb import init_db, create_tables, populate_tables, select_users
+from db.shopdb import init_db, create_tables, populate_tables
 from aiogram.types import BotCommand
-from handlers.schedular import scheduler_router, send_reminder, remind_me
+from handlers.schedular import scheduler_router, remind_me
+from parser.mashinakg import dbcars
+
 
 async def on_startup(dispatcher):
     init_db()
     create_tables()
     populate_tables()
     await remind_me()
+    dbcars()
+
 
 
 async def main():

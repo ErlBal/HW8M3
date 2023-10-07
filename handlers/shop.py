@@ -4,7 +4,6 @@ from aiogram.filters import Command
 from aiogram.types.keyboard_button import KeyboardButton
 from aiogram.types.reply_keyboard_markup import ReplyKeyboardMarkup
 from aiogram.types.reply_keyboard_remove import ReplyKeyboardRemove
-from db.shopdb import get_products
 from db.shopdb import get_product_by_category
 
 
